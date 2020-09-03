@@ -3,4 +3,15 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#FB3F4C</color>
+    <color name="red_10">#1AFB3F4C</color>
+    <color name="green">#1EB763</color>
+    <color name="blue">#007AFF</color>
+    <color name="grey">#888888</color>
+
+    <color name="ripple_light">#33FFFFFF</color>
+    <color name="ripple_dark">#14000000</color>
 </resources>
