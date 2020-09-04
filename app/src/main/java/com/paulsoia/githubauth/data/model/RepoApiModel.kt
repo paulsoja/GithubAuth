@@ -9,5 +9,5 @@ data class RepoApiModel(
     @SerializedName("owner") val owner: OwnerApiModel,
     @SerializedName("private") val isPrivate: Boolean,
     @SerializedName("description") val description: String?,
-    @SerializedName("language") val language: String
+    @SerializedName("language") val language: String?
 )
