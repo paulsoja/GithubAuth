@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.paulsoia.githubauth.domain.interactors.GetReposByNameUseCase
 import com.paulsoia.githubauth.domain.interactors.GetReposByUserUseCase
-import com.paulsoia.githubauth.domain.model.AccessToken
 import com.paulsoia.githubauth.domain.model.Repo
 import com.paulsoia.githubauth.presentation.di.scope.PerActivity
 import javax.inject.Inject

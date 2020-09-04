@@ -1,6 +1,5 @@
 package com.paulsoia.githubauth.presentation.ui.auth
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.paulsoia.githubauth.domain.interactors.GetAccessTokenUseCase
@@ -16,13 +15,8 @@ class AuthViewModel @Inject constructor(
     internal val result = MutableLiveData<AccessToken>()
     internal val warningResult = MutableLiveData<String>()
 
-    internal fun getAccessToken(
-        code: String,
-        redirectUri: String,
-        clientSecret: String,
-        clientId: String
-    ): LiveData<AccessToken> {
-        val params = GetAccessTokenUseCase.Params(code, redirectUri, clientSecret, clientId)
+    internal fun getAccessToken(code: String) {
+        val params = GetAccessTokenUseCase.Params(code)
         getAccessTokenUseCase(params) {
             it.onSuccess {
                 result.value = it
@@ -30,7 +24,6 @@ class AuthViewModel @Inject constructor(
                 warningResult.value = it.message
             }
         }
-        return result
     }
 
 }

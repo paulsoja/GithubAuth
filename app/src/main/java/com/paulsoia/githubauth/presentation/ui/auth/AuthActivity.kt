@@ -37,9 +37,7 @@ class AuthActivity : AppCompatActivity(), OAuthWebViewClient.Callback {
     private fun initWebView() {
         val oAuthClient = OAuthWebViewClient()
         oAuthClient.callback = this
-        val uri = "http://www.paulsoja85.com"
-        val clientId = "2a863785de5c718913d0"
-        val url = "${Const.AUTH_URL}client_id=$clientId&redirect_uri=$uri"
+        val url = "${Const.AUTH_URL}client_id=${Const.CLIENT_ID}&redirect_uri=${Const.URL_CALLBACK}"
 
         webView.isVerticalScrollBarEnabled = false
         webView.isHorizontalScrollBarEnabled = false
@@ -50,12 +48,7 @@ class AuthActivity : AppCompatActivity(), OAuthWebViewClient.Callback {
 
     override fun onSuccess(code: String) {
         Log.d("Code_ok", code)
-        viewModel.getAccessToken(
-            code = code,
-            redirectUri = "http://www.paulsoja85.com",
-            clientId = "2a863785de5c718913d0",
-            clientSecret = "eb2c44c3774c7eb8696675a331d378110a782d1f"
-        )
+        viewModel.getAccessToken(code = code)
     }
 
     override fun onError() {

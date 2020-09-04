@@ -5,14 +5,14 @@ import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.paulsoia.githubauth.data.Const
 
 class OAuthWebViewClient : WebViewClient() {
 
     var callback: Callback? = null
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-        val callbackUrl = "http://www.paulsoja85.com"
-        if (request?.url.toString().startsWith(callbackUrl)) {
+        if (request?.url.toString().startsWith(Const.URL_CALLBACK)) {
             val urls = request?.url.toString().split("=")
             callback?.onSuccess(urls[1])
             return true
@@ -31,10 +31,12 @@ class OAuthWebViewClient : WebViewClient() {
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
         super.onPageStarted(view, url, favicon)
+        //progressBar.isVisible = true
     }
 
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
+        //progressBar.isVisible = false
     }
 
     interface Callback {

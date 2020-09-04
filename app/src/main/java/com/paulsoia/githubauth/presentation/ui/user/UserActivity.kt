@@ -27,8 +27,8 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
         initListeners()
         initRecyclerView()
-        repos()
-        warning()
+        getRepos()
+        getWarning()
     }
 
     override fun onDestroy() {
@@ -51,13 +51,13 @@ class UserActivity : AppCompatActivity() {
         }
     }
 
-    private fun repos() {
+    private fun getRepos() {
         viewModel.result.observe(this, {
             adapter.swapData(it)
         })
     }
 
-    private fun warning() {
+    private fun getWarning() {
         viewModel.warningResult.observe(this, {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
             Log.d("getRepos fail: ", it)
