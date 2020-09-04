@@ -28,16 +28,15 @@ class RepoAdapter @Inject constructor() : RecyclerView.Adapter<BaseViewHolder<*>
         (holder as? RepoViewHolder)?.bind(items[position])
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
 
-    inner class RepoViewHolder(view: View) : BaseViewHolder<Repo>(view) {
+    private class RepoViewHolder(view: View) : BaseViewHolder<Repo>(view) {
 
         override fun bind(item: Repo) {
             with(itemView) {
                 tvTitle.text = item.name
                 tvDesc.text = item.description
+                tvLang.text = item.language
             }
         }
 

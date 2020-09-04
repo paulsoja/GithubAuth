@@ -25,14 +25,23 @@ class UserActivity : AppCompatActivity() {
         GithubInjector.plusUserActivityComponent(this)?.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+        initListeners()
         initRecyclerView()
-        repos()
-        warning()
+        getRepos()
+        getWarning()
     }
 
     override fun onDestroy() {
         GithubInjector.clearUserActivityComponent()
         super.onDestroy()
+    }
+
+    private fun initListeners() {
+        btnSearch.setOnClickListener {
+            val nameRepo = etSearch.text.toString().trim()
+            if (nameRepo.length < 3) Toast.makeText(this, "Write min 3 characters", Toast.LENGTH_SHORT).show()
+            else viewModel.searchRepos(nameRepo)
+        }
     }
 
     private fun initRecyclerView() {
@@ -42,14 +51,13 @@ class UserActivity : AppCompatActivity() {
         }
     }
 
-    private fun repos() {
+    private fun getRepos() {
         viewModel.result.observe(this, {
-            Toast.makeText(this, "${it.size}", Toast.LENGTH_LONG).show()
-            Log.w("getRepos ok: ", "${it.size}")
+            adapter.swapData(it)
         })
     }
 
-    private fun warning() {
+    private fun getWarning() {
         viewModel.warningResult.observe(this, {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
             Log.d("getRepos fail: ", it)

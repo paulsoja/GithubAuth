@@ -1,24 +1,23 @@
 package com.paulsoia.githubauth.domain.interactors
 
-import android.util.Log
-import com.paulsoia.githubauth.domain.model.Repo
+import com.paulsoia.githubauth.domain.model.Search
 import com.paulsoia.githubauth.domain.repository.PreferencesRepository
 import com.paulsoia.githubauth.domain.repository.RepoRepository
-import java.lang.Exception
 import javax.inject.Inject
 
-class GetReposByUserUseCase @Inject constructor(
+class GetReposByNameUseCase @Inject constructor(
     private val repoRepository: RepoRepository,
     private val preferencesRepository: PreferencesRepository
-) : BaseUseCase<BaseUseCase.None, List<Repo>>() {
+) : BaseUseCase<GetReposByNameUseCase.Params, Search>() {
 
-    override suspend fun run(): Result<List<Repo>> {
+    data class Params(val name: String)
+
+    override suspend fun run(): Result<Search> {
+        if (params == null) throw IllegalArgumentException("Parameter required")
         return try {
             preferencesRepository.getAccessToken()?.let {
-                repoRepository.getReposByUser(it).onSuccess {
+                repoRepository.getReposByName(params!!.name, it).onSuccess {
                     Result.success(it)
-                }.onFailure {
-                    Log.d("GetRepos failure: ", it.message!!)
                 }
             } ?: Result.failure(Throwable("No access token"))
         } catch (e: Exception) {
