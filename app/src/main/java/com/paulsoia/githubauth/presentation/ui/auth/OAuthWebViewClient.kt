@@ -11,7 +11,7 @@ class OAuthWebViewClient : WebViewClient() {
     var callback: Callback? = null
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-        val callbackUrl = "http://www.osperi.com"
+        val callbackUrl = "http://www.paulsoja85.com"
         if (request?.url.toString().startsWith(callbackUrl)) {
             val urls = request?.url.toString().split("=")
             callback?.onSuccess(urls[1])
