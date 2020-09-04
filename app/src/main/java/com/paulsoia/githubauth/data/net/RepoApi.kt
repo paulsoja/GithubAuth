@@ -11,13 +11,13 @@ interface RepoApi {
     @GET("search/repositories")
     fun getSearchData(
         @Query("q") q: String,
-        @Query("sort") sort: String,
-        @Query("order") order: String,
-        @Query("per_page") perPage: Int,
-        @Query("page") page: Int,
+        @Query("sort") sort: String? = null,
+        @Query("order") order: String? = null,
+        @Query("per_page") perPage: Int = 10,
+        @Query("page") page: Int = 1,
     ): Call<SearchApiModel>
 
-    @GET("user/repos")
+    @GET("user/repos?")
     fun getUserRepos(
         @Query("access_token") accessToken: String
     ): Call<List<RepoApiModel>>

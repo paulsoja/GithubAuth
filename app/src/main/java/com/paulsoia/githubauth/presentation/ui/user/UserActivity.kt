@@ -1,6 +1,8 @@
 package com.paulsoia.githubauth.presentation.ui.user
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulsoia.githubauth.R
@@ -24,6 +26,8 @@ class UserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
         initRecyclerView()
+        repos()
+        warning()
     }
 
     override fun onDestroy() {
@@ -36,6 +40,20 @@ class UserActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@UserActivity)
             adapter = this@UserActivity.adapter
         }
+    }
+
+    private fun repos() {
+        viewModel.result.observe(this, {
+            Toast.makeText(this, "${it.size}", Toast.LENGTH_LONG).show()
+            Log.w("getRepos ok: ", "${it.size}")
+        })
+    }
+
+    private fun warning() {
+        viewModel.warningResult.observe(this, {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            Log.d("getRepos fail: ", it)
+        })
     }
 
 }

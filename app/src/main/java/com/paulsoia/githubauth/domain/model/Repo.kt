@@ -6,6 +6,6 @@ data class Repo(
     val fullName: String,
     val owner: Owner,
     val isPrivate: Boolean,
-    val description: String,
+    val description: String?,
     val language: String
 )
