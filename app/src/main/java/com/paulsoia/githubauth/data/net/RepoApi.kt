@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface RepoApi {
 
-    @GET("search/repositories")
+    @GET("search/repositories?")
     fun getSearchData(
         @Query("q") q: String,
         @Query("sort") sort: String? = null,

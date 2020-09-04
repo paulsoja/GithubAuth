@@ -66,7 +66,7 @@ class AuthActivity : AppCompatActivity(), OAuthWebViewClient.Callback {
         viewModel.result.observe(this, {
             preferencesRepository.saveAccessToken("${it.accessToken}")
             startActivity(Intent(this, UserActivity::class.java))
-            finish()
+            finishAffinity()
         })
     }
 
