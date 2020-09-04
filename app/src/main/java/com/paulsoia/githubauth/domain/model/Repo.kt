@@ -7,5 +7,5 @@ data class Repo(
     val owner: Owner,
     val isPrivate: Boolean,
     val description: String?,
-    val language: String
+    val language: String?
 )
